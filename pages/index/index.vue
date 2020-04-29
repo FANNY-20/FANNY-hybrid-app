@@ -5,7 +5,21 @@
 <template>
   <div class="p-index">
     <v-btn
+      class="ma-2"
       color="blue white--text"
+      block
+      x-large
+    >
+      <v-icon left>
+        mdi-crosshairs-gps
+      </v-icon>
+
+      Activer le suivi
+    </v-btn>
+
+    <v-btn
+      class="ma-2"
+      color="orange white--text"
       block
       x-large
     >
@@ -13,6 +27,7 @@
     </v-btn>
 
     <v-btn
+      class="ma-2"
       color="red white--text"
       block
       x-large
