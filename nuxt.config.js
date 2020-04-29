@@ -1,13 +1,18 @@
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
+
+import colors from "vuetify/lib/util/colors";
+
 module.exports = {
   mode: "spa",
   env: {
     BASE_URL: process.env.BASE_URL,
     API_HOST: process.env.API_HOST,
   },
-  loading: { color: "mediumspringgreen" },
+  loading: {
+    color: colors.blue.base,
+  },
   build: {
     extend(config, { isDev, isClient }) {
       if (isDev && isClient) {
@@ -49,6 +54,7 @@ module.exports = {
   plugins: [
     "@/plugins/svg-img",
     "@/plugins/joi",
+    "@/plugins/geolocation.client",
   ],
   css: [
     "@/assets/styles/bases/index.scss",
