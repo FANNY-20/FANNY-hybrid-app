@@ -19,7 +19,8 @@
     "prettify:check": "prettier --config prettier.config.js --ignore-path .gitignore --check './**/*.{tpl,md,yml,json}'",
     "e2e": "node test/e2e/runner.js --env chrome-headless,firefox-headless",
     "unit": "mocha --config mocha.config.js './**/*.test.js'",
-    "test": "yarn unit && yarn e2e"
+    "test": "yarn unit && yarn e2e",
+    "postinstall": "jetifier"
   },
   "devDependencies": {
     "@babel/plugin-proposal-export-default-from": "^7.8.3",
@@ -40,6 +41,7 @@
     "express": "^4.17.1",
     "geckodriver": "^1.19.1",
     "html-loader": "^1.1.0",
+    "jetifier": "^1.6.5",
     "mocha": "^7.1.2",
     "nightwatch": "^1.3.4",
     "node-sass": "^4.14.0",
