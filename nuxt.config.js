@@ -54,6 +54,7 @@ module.exports = {
   plugins: [
     "@/plugins/svg-img",
     "@/plugins/joi",
+    "@/plugins/geolocation.client",
   ],
   css: [
     "@/assets/styles/bases/index.scss",
