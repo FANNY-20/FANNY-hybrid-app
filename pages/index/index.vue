@@ -48,9 +48,8 @@
   <div class="p-index">
     <v-btn
       v-if="isGeolocationStarted"
-      class="ma-2"
+      class="cta-button"
       color="blue white--text"
-      block
       x-large
       @click="onDeactivateTrackingButtonClick"
     >
@@ -63,9 +62,8 @@
 
     <v-btn
       v-else
-      class="ma-2"
+      class="cta-button"
       color="blue white--text"
-      block
       x-large
       @click="onActivateTrackingButtonClick"
     >
@@ -77,9 +75,8 @@
     </v-btn>
 
     <v-btn
-      class="ma-2"
+      class="cta-button"
       color="orange white--text"
-      block
       x-large
       @click="onAskForExposureButtonClick"
     >
@@ -87,9 +84,8 @@
     </v-btn>
 
     <v-btn
-      class="ma-2"
+      class="cta-button"
       color="red white--text"
-      block
       x-large
       @click="onDeclareDiseaseButtonClick"
     >
@@ -100,6 +96,16 @@
 
 <style lang="scss" scoped>
   .p-index {
+    $_gutter: 12px;
 
+    height: 100%;
+    padding: $_gutter;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .cta-button + .cta-button {
+      margin-top: $_gutter;
+    }
   }
 </style>
