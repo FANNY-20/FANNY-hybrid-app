@@ -34,7 +34,11 @@ export class CrossPlatformGeolocation {
 
           listener({ latitude, longitude });
 
-          await BackgroundGeolocation.finish();
+          try {
+            await BackgroundGeolocation.finish();
+          } catch(e) {
+            // Noop
+          }
         });
     }
   }
