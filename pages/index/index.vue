@@ -1,8 +1,35 @@
 <script>
   export default {
+    data() {
+      return {
+        isGeolocationStarted: false,
+      };
+    },
+    watch: {
+      isGeolocationStarted(newVal, oldVal) {
+        if (newVal && !oldVal) {
+          this.$geolocation.start();
+
+          return;
+        }
+
+        if (!newVal && oldVal) {
+          this.$geolocation.stop();
+        }
+      },
+    },
     methods: {
+      initGeolocation() {
+        this.$geolocation.addLocationListener(({ latitude, longitude }) => {
+          // TODO
+          console.log(latitude, longitude);
+        });
+      },
       onActivateTrackingButtonClick() {
-        // TODO
+        this.isGeolocationStarted = true;
+      },
+      onDeactivateTrackingButtonClick() {
+        this.isGeolocationStarted = false;
       },
       onAskForExposureButtonClick() {
         // TODO
@@ -11,12 +38,31 @@
         // TODO
       },
     },
+    created() {
+      this.initGeolocation();
+    },
   };
 </script>
 
 <template>
   <div class="p-index">
     <v-btn
+      v-if="isGeolocationStarted"
+      class="ma-2"
+      color="blue white--text"
+      block
+      x-large
+      @click="onDeactivateTrackingButtonClick"
+    >
+      <v-icon left>
+        mdi-crosshairs
+      </v-icon>
+
+      Désactiver le suivi
+    </v-btn>
+
+    <v-btn
+      v-else
       class="ma-2"
       color="blue white--text"
       block
