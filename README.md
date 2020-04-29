@@ -95,18 +95,6 @@ $ yarn e2e
 $ yarn unit
 ```
 
-### Lancer le serveur styleguide (documentation des composants avec HMR)
-
-```bash
-$ yarn styleguide
-```
-
-### Lancer le build styleguide
-
-```bash
-$ yarn styleguide:build
-```
-
 ### Modifier le numéro du version du projet
 
 ```bash
