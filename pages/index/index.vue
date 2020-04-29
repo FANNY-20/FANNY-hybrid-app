@@ -24,6 +24,6 @@
 
 <style lang="scss" scoped>
   .p-index {
-    border: 1px solid lime;
+
   }
 </style>
