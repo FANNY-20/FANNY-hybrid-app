@@ -1,0 +1,30 @@
+// Transitions générées pour VueJS
+@mixin transition-enter(
+  $name,
+  $duration,
+  $timing-function: ease-in,
+  $delay: 0ms
+) {
+  &.#{$name}-enter {
+    @content;
+  }
+
+  &.#{$name}-enter-active {
+    transition: all $duration $timing-function $delay;
+  }
+}
+
+@mixin transition-leave-to(
+  $name,
+  $duration,
+  $timing-function: ease-out,
+  $delay: 0ms
+) {
+  &.#{$name}-leave-to {
+    @content;
+  }
+
+  &.#{$name}-leave-active {
+    transition: all $duration $timing-function $delay;
+  }
+}
