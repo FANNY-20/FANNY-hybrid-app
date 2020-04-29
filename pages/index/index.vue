@@ -1,5 +1,17 @@
 <script>
-  export default {};
+  export default {
+    methods: {
+      onActivateTrackingButtonClick() {
+        // TODO
+      },
+      onAskForExposureButtonClick() {
+        // TODO
+      },
+      onDeclareDiseaseButtonClick() {
+        // TODO
+      },
+    },
+  };
 </script>
 
 <template>
@@ -9,6 +21,7 @@
       color="blue white--text"
       block
       x-large
+      @click="onActivateTrackingButtonClick"
     >
       <v-icon left>
         mdi-crosshairs-gps
@@ -22,6 +35,7 @@
       color="orange white--text"
       block
       x-large
+      @click="onAskForExposureButtonClick"
     >
       Ai-je été exposé ?
     </v-btn>
@@ -31,6 +45,7 @@
       color="red white--text"
       block
       x-large
+      @click="onDeclareDiseaseButtonClick"
     >
       Je me déclare porteur !
     </v-btn>
