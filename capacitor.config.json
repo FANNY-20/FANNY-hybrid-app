@@ -1,0 +1,9 @@
+{
+  "appId": "fr.soyhuce.stopcovid",
+  "appName": "StopCovid",
+  "bundledWebRuntime": false,
+  "npmClient": "yarn",
+  "webDir": "dist",
+  "cordova": {},
+  "linuxAndroidStudioPath": "studio.sh"
+}

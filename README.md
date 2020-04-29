@@ -23,6 +23,12 @@ $ yarn build
 $ yarn start
 ```
 
+## Lancer le build de production pour l'app hybride / native
+
+```bash
+$ yarn build:native
+```
+
 ### Générer statiquement le projet
 
 ```bash

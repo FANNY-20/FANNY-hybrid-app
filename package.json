@@ -24,6 +24,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-export-default-from": "^7.8.3",
     "@babel/runtime-corejs2": "^7.9.2",
+    "@capacitor/cli": "^2.0.1",
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/style-resources": "^1.0.0",
     "babel-eslint": "^10.1.0",
@@ -50,6 +51,9 @@
     "stylelint": "^13.3.3"
   },
   "dependencies": {
+    "@capacitor/android": "2.0.1",
+    "@capacitor/core": "^2.0.1",
+    "@capacitor/ios": "2.0.1",
     "@hapi/joi": "^17.1.1",
     "@nuxtjs/axios": "^5.10.2",
     "@nuxtjs/vuetify": "^1.11.2",
