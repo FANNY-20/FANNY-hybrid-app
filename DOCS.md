@@ -35,13 +35,6 @@ Framework de tests unitaires (Mocha) et sa librairie d'assertions (Chai)
 - [Doc officielle Chai](https://www.chaijs.com/guide/styles/)
 - [API Chai (expect, assert, should, ...)](https://www.chaijs.com/api/)
 
-## Vue Styleguidist
-
-Environnement de documentation de composants VueJS
-
-- [Guide de documentation d'un composant](https://vue-styleguidist.github.io/docs/Documenting.html)
-- [Liste des tags ESDoc](https://esdoc.org/manual/tags.html)
-
 ## Prettier
 
 Formateur de code (Vue, JS, JSON, HTML, SCSS, CSS, ...)

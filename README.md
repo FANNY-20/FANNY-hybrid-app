@@ -101,12 +101,6 @@ $ yarn e2e
 $ yarn unit
 ```
 
-### Modifier le numéro du version du projet
-
-```bash
-$ yo nuxt:stamp x.y.z
-```
-
 ## Ressources / documentation
 
 [Voir les documentations](./DOCS.md)
