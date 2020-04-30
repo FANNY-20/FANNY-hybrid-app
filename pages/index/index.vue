@@ -1,5 +1,6 @@
 <script>
   import { mapState, mapActions } from "vuex";
+  import Peer from "peerjs";
 
   export default {
     data() {
@@ -23,6 +24,9 @@
         if (!newVal && oldVal) {
           this.$geolocation.stop();
         }
+      },
+      uuid(newVal) {
+        this.initPeer(newVal);
       },
     },
     methods: {
@@ -50,6 +54,31 @@
           this.trySendGeolocation({ latitude, longitude });
         });
       },
+      initPeer(peerId) {
+        if(this.peer) {
+          this.peer.destroy();
+        }
+
+        const peerOptions = {
+          host: process.env.PEER_SERVER_HOST,
+          port: process.env.PEER_SERVER_PORT,
+          debug: 3,
+        };
+
+        if (process.env.PEER_SERVER_KEY) {
+          peerOptions.key = process.env.PEER_SERVER_KEY;
+        }
+
+        this.peer = new Peer(peerId, peerOptions);
+
+        this.peer.on("connection", (conn) => {
+          conn.on("open", () => this.onPeerConnectionOpen(conn));
+        });
+      },
+      onPeerConnectionOpen(conn) {
+        // TODO
+        conn.send("Hello World");
+      },
       onActivateTrackingButtonClick() {
         this.isGeolocationStarted = true;
       },
@@ -64,6 +93,8 @@
       },
     },
     created() {
+      this.peer = null;
+
       this.renewUuid();
       this.initGeolocation();
     },
