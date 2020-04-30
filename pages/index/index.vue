@@ -32,10 +32,22 @@
       ...mapActions("geolocation", [
         "sendGeolocation",
       ]),
+      async trySendGeolocation({ latitude, longitude }) {
+        try {
+          // TODO: handle response data
+          await this.sendGeolocation({
+            uuid: this.getUuid,
+            latitude,
+            longitude,
+          });
+        } catch(e) {
+          // TODO: handle error
+          console.error("Error caught !\n", e);
+        }
+      },
       initGeolocation() {
         this.$geolocation.addLocationListener(({ latitude, longitude }) => {
-          // TODO
-          console.log(latitude, longitude);
+          this.trySendGeolocation({ latitude, longitude });
         });
       },
       onActivateTrackingButtonClick() {
