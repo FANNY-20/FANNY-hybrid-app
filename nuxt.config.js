@@ -1,18 +1,15 @@
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
-
 const colors = require("vuetify/lib/util/colors").default;
-
 module.exports = {
   mode: "spa",
   env: {
     BASE_URL: process.env.BASE_URL,
     API_HOST: process.env.API_HOST,
+    AUTHORIZATION_TOKEN: process.env.AUTHORIZATION_TOKEN,
   },
-  loading: {
-    color: colors.blue.base,
-  },
+  loading: { color: colors.blue.base },
   build: {
     extend(config, { isDev, isClient }) {
       if (isDev && isClient) {
@@ -52,6 +49,7 @@ module.exports = {
     "@nuxtjs/axios",
   ],
   plugins: [
+    "@/plugins/axios",
     "@/plugins/svg-img",
     "@/plugins/joi",
     "@/plugins/geolocation.client",
