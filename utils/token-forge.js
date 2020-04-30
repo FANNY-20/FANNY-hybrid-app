@@ -3,8 +3,8 @@ export default class TokenForge {
    * @param {string[]} uuids
    */
   constructor(uuids) {
-    if (uuids.length !== 2) {
-      throw new Error("The uuids param must have exactly 2 elements");
+    if (!Array.isArray(uuids) || uuids.length !== 2) {
+      throw new Error("The uuids param must be an array of 2 elements");
     }
 
     this._sortedUuids = [...uuids];
