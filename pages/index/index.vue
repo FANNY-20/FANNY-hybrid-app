@@ -1,9 +1,16 @@
 <script>
+  import { mapState, mapActions } from "vuex";
+
   export default {
     data() {
       return {
         isGeolocationStarted: false,
       };
+    },
+    computed: {
+      ...mapState("me", {
+        getUuid: "uuid",
+      }),
     },
     watch: {
       isGeolocationStarted(newVal, oldVal) {
@@ -19,6 +26,9 @@
       },
     },
     methods: {
+      ...mapActions("me", [
+        "renewUuid",
+      ]),
       initGeolocation() {
         this.$geolocation.addLocationListener(({ latitude, longitude }) => {
           // TODO
