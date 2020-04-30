@@ -1,4 +1,4 @@
-# stop-covid-frontend-backoffice
+# stop-covid-frontend-hybrid
 
 ![Release](https://img.shields.io/badge/Release-0.1.0-blue.svg)
 

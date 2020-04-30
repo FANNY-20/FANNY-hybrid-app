@@ -3,7 +3,7 @@ FROM node:10.16.3-alpine
 RUN apk update && apk upgrade
 RUN npm install -g yarn
 
-ARG FRONTEND_DIR=/opt/stop-covid-frontend-backoffice
+ARG FRONTEND_DIR=/opt/stop-covid-frontend-hybrid
 
 RUN mkdir $FRONTEND_DIR
 
