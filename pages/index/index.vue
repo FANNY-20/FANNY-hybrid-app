@@ -58,7 +58,6 @@
         const peerOptions = {
           host: process.env.PEER_SERVER_HOST,
           port: process.env.PEER_SERVER_PORT,
-          debug: 3,
         };
 
         if (process.env.PEER_SERVER_KEY) {
