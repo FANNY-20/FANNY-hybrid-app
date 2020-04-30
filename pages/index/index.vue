@@ -29,6 +29,9 @@
       ...mapActions("me", [
         "renewUuid",
       ]),
+      ...mapActions("geolocation", [
+        "sendGeolocation",
+      ]),
       initGeolocation() {
         this.$geolocation.addLocationListener(({ latitude, longitude }) => {
           // TODO
