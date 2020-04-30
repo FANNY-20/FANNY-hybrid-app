@@ -17,11 +17,7 @@
       isGeolocationStarted(newVal, oldVal) {
         if (newVal && !oldVal) {
           this.$geolocation.start();
-
-          return;
-        }
-
-        if (!newVal && oldVal) {
+        } else if (!newVal && oldVal) {
           this.$geolocation.stop();
         }
       },
