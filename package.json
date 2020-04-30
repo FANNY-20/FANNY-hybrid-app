@@ -23,8 +23,10 @@
     "postinstall": "jetifier"
   },
   "devDependencies": {
+    "@babel/core": "^7.9.6",
     "@babel/plugin-proposal-export-default-from": "^7.8.3",
-    "@babel/runtime-corejs2": "^7.9.2",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/register": "^7.9.0",
     "@capacitor/cli": "^2.0.1",
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/style-resources": "^1.0.0",
