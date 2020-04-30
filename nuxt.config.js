@@ -8,6 +8,9 @@ module.exports = {
     BASE_URL: process.env.BASE_URL,
     API_HOST: process.env.API_HOST,
     AUTHORIZATION_TOKEN: process.env.AUTHORIZATION_TOKEN,
+    PEER_SERVER_HOST: process.env.PEER_SERVER_HOST,
+    PEER_SERVER_PORT: process.env.PEER_SERVER_PORT,
+    PEER_SERVER_KEY: process.env.PEER_SERVER_KEY,
   },
   loading: { color: colors.blue.base },
   build: {
