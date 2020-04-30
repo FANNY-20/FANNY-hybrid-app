@@ -32,7 +32,9 @@ export const actions = {
 
     try {
       // TODO: set route
-      const { data } = await this.$axios.$post("", body);
+      const { data } = await this.$axios.$post("yolo", body, {
+        progress: false,
+      });
 
       commit(SEND_GEOLOCATION_SUCCESS);
 
