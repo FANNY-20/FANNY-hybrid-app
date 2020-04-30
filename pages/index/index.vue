@@ -1,6 +1,7 @@
 <script>
   import { mapState, mapActions } from "vuex";
   import Peer from "peerjs";
+  import TokenExchange from "@/utils/token-exchange";
 
   export default {
     data() {
@@ -34,15 +35,19 @@
       ]),
       async trySendGeolocation({ latitude, longitude }) {
         try {
-          // TODO: handle response data
-          await this.sendGeolocation({
+          const exposedUuids = await this.sendGeolocation({
             uuid: this.uuid,
             latitude,
             longitude,
           });
+
+          for (const exposedUuid of exposedUuids) {
+            const tokenExchange = new TokenExchange(this.uuid, exposedUuid, this.peer);
+
+            tokenExchange.proceed();
+          }
         } catch(e) {
-          // TODO: handle error
-          console.error("Error caught !\n", e);
+          // Noop
         }
       },
       initGeolocation() {
@@ -71,8 +76,18 @@
         });
       },
       onPeerConnectionOpen(conn) {
-        // TODO
-        conn.send("Hello World");
+        conn.on("data", (data) => {
+          if (data && /^[a-f0-9]{64}$/.test(data)) {
+            // TODO: store token locally
+            console.log("Token received", data);
+
+            // Acknowledgment
+            conn.send({
+              status: "success",
+              token: data,
+            });
+          }
+        });
       },
       onActivateTrackingButtonClick() {
         this.isGeolocationStarted = true;
