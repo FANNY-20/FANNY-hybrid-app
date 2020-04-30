@@ -13,6 +13,8 @@ export default class TokenForge {
 
   /**
    * Produces a SHA256 hash by concatenating the 2 uuids
+   *
+   * @returns {Promise<string>}
    */
   async craft() {
     const encoder = new TextEncoder();
