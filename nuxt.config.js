@@ -2,7 +2,7 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 
-import colors from "vuetify/lib/util/colors";
+const colors = require("vuetify/lib/util/colors").default;
 
 module.exports = {
   mode: "spa",
