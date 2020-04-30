@@ -1,3 +1,5 @@
+import { sha256 } from "js-sha256";
+
 export default class TokenForge {
   /**
    * @param {string[]} uuids
@@ -14,14 +16,9 @@ export default class TokenForge {
   /**
    * Produces a SHA256 hash by concatenating the 2 uuids
    *
-   * @returns {Promise<string>}
+   * @returns {string}
    */
-  async craft() {
-    const encoder = new TextEncoder();
-    const concatenatedUuidsData = encoder.encode(this._sortedUuids.join(""));
-    const hashBuffer = await crypto.subtle.digest("SHA-256", concatenatedUuidsData);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-
-    return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+  craft() {
+    return sha256(this._sortedUuids.join(""));
   }
 }
