@@ -8,9 +8,9 @@
       };
     },
     computed: {
-      ...mapState("me", {
-        getUuid: "uuid",
-      }),
+      ...mapState("me", [
+        "uuid",
+      ]),
     },
     watch: {
       isGeolocationStarted(newVal, oldVal) {
@@ -36,7 +36,7 @@
         try {
           // TODO: handle response data
           await this.sendGeolocation({
-            uuid: this.getUuid,
+            uuid: this.uuid,
             latitude,
             longitude,
           });
