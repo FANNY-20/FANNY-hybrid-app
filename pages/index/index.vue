@@ -49,6 +49,7 @@
       },
     },
     created() {
+      this.renewUuid();
       this.initGeolocation();
     },
   };
