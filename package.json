@@ -23,8 +23,10 @@
     "postinstall": "jetifier"
   },
   "devDependencies": {
+    "@babel/core": "^7.9.6",
     "@babel/plugin-proposal-export-default-from": "^7.8.3",
-    "@babel/runtime-corejs2": "^7.9.2",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/register": "^7.9.0",
     "@capacitor/cli": "^2.0.1",
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/style-resources": "^1.0.0",
@@ -62,6 +64,7 @@
     "@mauron85/cordova-plugin-background-geolocation": "^3.1.0",
     "@nuxtjs/axios": "^5.10.2",
     "@nuxtjs/vuetify": "^1.11.2",
+    "js-sha256": "^0.9.0",
     "lodash.camelcase": "^4.3.0",
     "lodash.forown": "^4.4.0",
     "lodash.isplainobject": "^4.0.6",
