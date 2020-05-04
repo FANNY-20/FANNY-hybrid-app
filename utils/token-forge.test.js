@@ -11,7 +11,7 @@ describe("TokenForge", () => {
 
     const token = forge.craft();
 
-    assert.lengthOf(token, 64);
+    assert.match(token, /^[a-f0-9]{64}$/);
   });
 
   it("should return the same sha256 hex value, no matter what the order of uuids is", () => {
