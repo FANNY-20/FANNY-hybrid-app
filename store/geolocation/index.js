@@ -31,8 +31,7 @@ export const actions = {
     };
 
     try {
-      // TODO: set route
-      const { data } = await this.$axios.$post("yolo", body, {
+      const { data } = await this.$axios.$post("geolocations", body, {
         progress: false,
       });
 
