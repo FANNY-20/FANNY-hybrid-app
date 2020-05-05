@@ -1,6 +1,5 @@
 <script>
   import { mapState, mapActions } from "vuex";
-  import Peer from "peerjs";
   import TokenExchange from "@/utils/token-exchange";
 
   export default {
@@ -11,7 +10,8 @@
     },
     computed: {
       ...mapState("me", [
-        "uuid",
+        "publicUuid",
+        "privateUuid",
       ]),
     },
     watch: {
@@ -22,29 +22,27 @@
           this.$geolocation.stop();
         }
       },
-      uuid(newVal) {
-        this.initPeer(newVal);
+      publicUuid(newVal) {
+        this.reinitTokenExchange(newVal, this.privateUuid);
       },
     },
     methods: {
       ...mapActions("me", [
-        "renewUuid",
+        "renewUuids",
       ]),
       ...mapActions("geolocation", [
         "sendGeolocation",
       ]),
       async trySendGeolocation({ latitude, longitude }) {
         try {
-          const exposedUuids = await this.sendGeolocation({
-            uuid: this.uuid,
+          const exposedPublicUuids = await this.sendGeolocation({
+            publicUuid: this.publicUuid,
             latitude,
             longitude,
           });
 
-          for (const exposedUuid of exposedUuids) {
-            const tokenExchange = new TokenExchange(this.uuid, exposedUuid, this.peer);
-
-            tokenExchange.proceed();
+          for (const exposedPublicUuid of exposedPublicUuids) {
+            this.tokenExchange.proceed(exposedPublicUuid);
           }
         } catch(e) {
           // Noop
@@ -55,39 +53,12 @@
           this.trySendGeolocation({ latitude, longitude });
         });
       },
-      initPeer(peerId) {
-        if(this.peer) {
-          this.peer.destroy();
+      reinitTokenExchange(publicUuid, privateUuid) {
+        if (this.tokenExchange) {
+          this.tokenExchange.destroy();
         }
 
-        const peerOptions = {
-          host: process.env.PEER_SERVER_HOST,
-          port: process.env.PEER_SERVER_PORT,
-        };
-
-        if (process.env.PEER_SERVER_KEY) {
-          peerOptions.key = process.env.PEER_SERVER_KEY;
-        }
-
-        this.peer = new Peer(peerId, peerOptions);
-
-        this.peer.on("connection", (conn) => {
-          conn.on("open", () => this.onPeerConnectionOpen(conn));
-        });
-      },
-      onPeerConnectionOpen(conn) {
-        conn.on("data", (data) => {
-          if (data && /^[a-f0-9]{64}$/.test(data)) {
-            // TODO: store token locally
-            console.log("Token received", data);
-
-            // Acknowledgment
-            conn.send({
-              status: "success",
-              token: data,
-            });
-          }
-        });
+        this.tokenExchange = new TokenExchange(publicUuid, privateUuid);
       },
       onActivateTrackingButtonClick() {
         this.isGeolocationStarted = true;
@@ -103,9 +74,9 @@
       },
     },
     created() {
-      this.peer = null;
+      this.tokenExchange = null;
 
-      this.renewUuid();
+      this.renewUuids();
       this.initGeolocation();
     },
   };

@@ -21,11 +21,11 @@ export const mutations = {
 };
 
 export const actions = {
-  async sendGeolocation({ commit }, { uuid, latitude, longitude }) {
+  async sendGeolocation({ commit }, { publicUuid, latitude, longitude }) {
     commit(SEND_GEOLOCATION_REQUEST);
 
     const body = {
-      uuid,
+      uuid: publicUuid,
       lat: latitude,
       lon: longitude,
     };
