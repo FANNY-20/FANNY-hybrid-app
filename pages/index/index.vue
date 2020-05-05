@@ -1,6 +1,6 @@
 <script>
   import { mapState, mapActions } from "vuex";
-  import TokenExchange from "@/utils/token-exchange";
+  import TokenExchanger from "@/utils/token-exchanger";
 
   export default {
     data() {
@@ -23,7 +23,7 @@
         }
       },
       publicUuid(newVal) {
-        this.reinitTokenExchange(newVal, this.privateUuid);
+        this.reinitTokenExchanger(newVal, this.privateUuid);
       },
     },
     methods: {
@@ -42,7 +42,7 @@
           });
 
           for (const exposedPublicUuid of exposedPublicUuids) {
-            this.tokenExchange.proceed(exposedPublicUuid);
+            this.tokenExchanger.proceed(exposedPublicUuid);
           }
         } catch(e) {
           // Noop
@@ -53,12 +53,12 @@
           this.trySendGeolocation({ latitude, longitude });
         });
       },
-      reinitTokenExchange(publicUuid, privateUuid) {
-        if (this.tokenExchange) {
-          this.tokenExchange.destroy();
+      reinitTokenExchanger(publicUuid, privateUuid) {
+        if (this.tokenExchanger) {
+          this.tokenExchanger.destroy();
         }
 
-        this.tokenExchange = new TokenExchange(publicUuid, privateUuid);
+        this.tokenExchanger = new TokenExchanger(publicUuid, privateUuid);
       },
       onActivateTrackingButtonClick() {
         this.isGeolocationStarted = true;
@@ -74,7 +74,7 @@
       },
     },
     created() {
-      this.tokenExchange = null;
+      this.tokenExchanger = null;
 
       this.renewUuids();
       this.initGeolocation();

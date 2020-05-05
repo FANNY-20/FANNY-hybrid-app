@@ -5,7 +5,7 @@ const TYPE_PRIVATE_UUID = "PRIVATE_UUID";
 const TYPE_TOKEN = "TOKEN";
 const TYPE_ACK = "ACK";
 
-export default class TokenExchange {
+export default class TokenExchanger {
   /**
    * @param {string} publicUuid
    * @param {string} privateUuid
