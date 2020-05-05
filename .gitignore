@@ -21,3 +21,5 @@ test/e2e/screenshots
 .DS_Store
 android
 ios
+docs/enhanced_token_exchange.png
+docs/token_exchange.png
