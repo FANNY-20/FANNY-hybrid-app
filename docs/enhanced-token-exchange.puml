@@ -10,12 +10,12 @@ participant Bob as b
 
 note over a,b
 Alice owns:
-- **PublicUuidA** (sharable with server and peers)
-- **PrivateUuidA** (sharable with peers only)
+- **PublicUuidA** (shareable with server and peers)
+- **PrivateUuidA** (shareable with peers only)
 
 Bob owns:
-- **PublicUuidB** (sharable with server and peers)
-- **PrivateUuidB** (sharable with peers only)
+- **PublicUuidB** (shareable with server and peers)
+- **PrivateUuidB** (shareable with peers only)
 
 The process is initiated when server provides
 the Bob's public uuid (**PublicUuidB**) to Alice
