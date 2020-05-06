@@ -1,5 +1,8 @@
 import TokenForge from "./token-forge";
 import Peer from "peerjs";
+import { Plugins } from "@capacitor/core";
+
+const { Storage } = Plugins;
 
 const TYPE_PRIVATE_UUID = "PRIVATE_UUID";
 const TYPE_TOKEN = "TOKEN";
@@ -90,23 +93,46 @@ export default class TokenExchanger {
     });
   }
 
-  _onReceiveTokenFromPeer(conn, token) {
-    // TODO: store token locally
-    console.log(token);
+  async _onReceiveTokenFromPeer(conn, token) {
+    // TODO: remove log
+    console.log("Received token from peer", token);
 
-    // Step 3: send acknowledgment
-    conn.send({
-      type: TYPE_ACK,
-      payload: {
-        ack: false, // TODO: ack based on token stored or not
-        token,
-      },
-    });
+    if (/^[0-9a-f]{64}$/.test(token)) {
+      // Should be "1" or undefined
+      const tokenExists = await Storage.get({
+        key: token,
+      });
+
+      if (!tokenExists) {
+        Storage.set({
+          key: token,
+          value: "1",
+        });
+      }
+
+      // Step 3: send acknowledgment
+      conn.send({
+        type: TYPE_ACK,
+        payload: {
+          ack: !tokenExists,
+          token,
+        },
+      });
+    } else {
+      conn.close();
+    }
   }
 
   _onReceiveAcknowledgmentFromPeer(conn, { ack, token }) {
-    // TODO: store token locally based on ack
-    console.log(ack, token);
+    // TODO: remove log
+    console.log("Received acknowledgment from peer", ack, token);
+
+    if (ack) {
+      Storage.set({
+        key: token,
+        value: "1",
+      });
+    }
 
     // Step 4: close connection, exchange is successful
     conn.close();
