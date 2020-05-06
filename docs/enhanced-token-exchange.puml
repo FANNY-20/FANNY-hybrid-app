@@ -1,0 +1,54 @@
+@startuml
+
+title
+Enhanced token exchange process between 2 peers
+end title
+
+autonumber
+participant Alice as a
+participant Bob as b
+
+note over a,b
+Alice owns:
+- **PublicUuidA** (shareable with server and peers)
+- **PrivateUuidA** (shareable with peers only)
+
+Bob owns:
+- **PublicUuidB** (shareable with server and peers)
+- **PrivateUuidB** (shareable with peers only)
+
+The process is initiated when server provides
+the Bob's public uuid (**PublicUuidB**) to Alice
+end note
+
+a -> b: Send **PrivateUuidA**
+note left
+Opens WebRTC channel
+using **PublicUuidB**
+end note
+
+b -> b: Craft **Token**
+note right
+**Token** = sha256(**PrivateUuidA** + **PrivateUuidB**)
+**PrivateUuidA** and **PrivateUuidB** are sorted by
+alphabetical order before concatenating
+end note
+
+b -> a: Send **Token**
+note left
+Check whether such a **Token**
+already exists locally.
+If no then store it (OK),
+otherwise discard (NOK)
+end note
+
+a -> b: Send acknowledgment (OK or NOK)
+note right
+If acknowledgment is OK
+then store **Token**.
+If NOK, discard
+end note
+
+b -> b: Close channel
+
+@enduml

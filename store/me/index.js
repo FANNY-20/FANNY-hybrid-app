@@ -1,25 +1,35 @@
 import { v4 as uuidv4 } from "uuid";
 
-const SET_UUID = "SET_UUID";
+const SET_PUBLIC_UUID = "SET_PUBLIC_UUID";
+const SET_PRIVATE_UUID = "SET_PRIVATE_UUID";
 
 export const state = () => ({
-  uuid: null,
+  publicUuid: null, // Shareable with server and peers
+  privateUuid: null, // Shareable with peers only
 });
 
 export const getters = {};
 
 export const mutations = {
-  [SET_UUID](state, value) {
-    state.uuid = value;
+  [SET_PUBLIC_UUID](state, value) {
+    state.publicUuid = value;
+  },
+  [SET_PRIVATE_UUID](state, value) {
+    state.privateUuid = value;
   },
 };
 
 export const actions = {
-  renewUuid({ commit }) {
-    const uuid = uuidv4();
+  renewUuids({ commit }) {
+    const publicUuid = uuidv4();
+    const privateUuid = uuidv4();
 
-    commit(SET_UUID, uuid);
+    commit(SET_PUBLIC_UUID, publicUuid);
+    commit(SET_PRIVATE_UUID, privateUuid);
 
-    return uuid;
+    return {
+      publicUuid,
+      privateUuid,
+    };
   },
 };

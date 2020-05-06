@@ -1,5 +1,6 @@
 <script>
   import { mapState, mapActions } from "vuex";
+  import TokenExchanger from "@/utils/token-exchanger";
 
   export default {
     data() {
@@ -8,47 +9,56 @@
       };
     },
     computed: {
-      ...mapState("me", {
-        getUuid: "uuid",
-      }),
+      ...mapState("me", [
+        "publicUuid",
+        "privateUuid",
+      ]),
     },
     watch: {
       isGeolocationStarted(newVal, oldVal) {
         if (newVal && !oldVal) {
           this.$geolocation.start();
-
-          return;
-        }
-
-        if (!newVal && oldVal) {
+        } else if (!newVal && oldVal) {
           this.$geolocation.stop();
         }
+      },
+      publicUuid(newVal) {
+        this.reinitTokenExchanger(newVal, this.privateUuid);
       },
     },
     methods: {
       ...mapActions("me", [
-        "renewUuid",
+        "renewUuids",
       ]),
       ...mapActions("geolocation", [
         "sendGeolocation",
       ]),
       async trySendGeolocation({ latitude, longitude }) {
         try {
-          // TODO: handle response data
-          await this.sendGeolocation({
-            uuid: this.getUuid,
+          const exposedPublicUuids = await this.sendGeolocation({
+            publicUuid: this.publicUuid,
             latitude,
             longitude,
           });
+
+          for (const exposedPublicUuid of exposedPublicUuids) {
+            this.tokenExchanger.proceed(exposedPublicUuid);
+          }
         } catch(e) {
-          // TODO: handle error
-          console.error("Error caught !\n", e);
+          // Noop
         }
       },
       initGeolocation() {
         this.$geolocation.addLocationListener(({ latitude, longitude }) => {
           this.trySendGeolocation({ latitude, longitude });
         });
+      },
+      reinitTokenExchanger(publicUuid, privateUuid) {
+        if (this.tokenExchanger) {
+          this.tokenExchanger.destroy();
+        }
+
+        this.tokenExchanger = new TokenExchanger(publicUuid, privateUuid);
       },
       onActivateTrackingButtonClick() {
         this.isGeolocationStarted = true;
@@ -64,7 +74,9 @@
       },
     },
     created() {
-      this.renewUuid();
+      this.tokenExchanger = null;
+
+      this.renewUuids();
       this.initGeolocation();
     },
   };
