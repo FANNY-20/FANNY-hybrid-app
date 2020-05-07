@@ -80,14 +80,16 @@
           const commonTokens = _intersection(localTokens, remoteTokens);
 
           if (commonTokens.length > 0) {
-            // TODO: toast exposed
-            console.log("EXPOSED");
+            this.$toast.warning("Il semblerait que vous ayez été exposé", {
+              timeout: 4000,
+            });
           } else {
-            // TODO: toast not exposed
-            console.log("NOT EXPOSED");
+            this.$toast.success("Vous ne semblez pas avoir été exposé", {
+              timeout: 4000,
+            });
           }
         } catch(e) {
-          // TODO: toast error
+          this.$toast.error("Une erreur est survenue, merci de réessayer plus tard...");
         }
       },
       async declareDisease() {
@@ -107,9 +109,11 @@
             });
           }
 
-          // TODO: toast OK
+          this.$toast.success("Votre déclaration a bien été prise en compte", {
+            timeout: 4000,
+          });
         } catch(e) {
-          // TODO: toast NOK
+          this.$toast.error("Une erreur est survenue, merci de réessayer plus tard...");
         }
       },
       onActivateTrackingButtonClick() {

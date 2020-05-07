@@ -72,6 +72,7 @@
     "nuxt": "2.12.2",
     "peerjs": "^1.2.0",
     "svg-parser": "^2.0.4",
-    "uuid": "^8.0.0"
+    "uuid": "^8.0.0",
+    "vuetify-toast-snackbar": "^0.6.1"
   }
 }

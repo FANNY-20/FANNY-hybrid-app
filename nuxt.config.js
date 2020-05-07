@@ -56,6 +56,7 @@ module.exports = {
     "@/plugins/svg-img",
     "@/plugins/joi",
     "@/plugins/geolocation.client",
+    "@/plugins/vuetify-toast.client",
   ],
   css: [
     "@/assets/styles/bases/index.scss",
