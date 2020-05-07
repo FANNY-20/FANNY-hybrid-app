@@ -11,12 +11,13 @@ export class CrossPlatformGeolocation {
     this._config = config;
     this._isWebPlatform = false;
     this._locationListeners = [];
+    this._platform = null;
   }
 
   async init() {
-    const info = await Device.getInfo();
+    this._platform = (await Device.getInfo()).platform;
 
-    if (info.platform === "web") {
+    if (this._platform === "web") {
       this._isWebPlatform = true;
     } else {
       await BackgroundGeolocation.configure(this._config);
@@ -35,7 +36,9 @@ export class CrossPlatformGeolocation {
           listener({ latitude, longitude });
 
           try {
-            await BackgroundGeolocation.finish();
+            if (this._platform === "ios") {
+              await BackgroundGeolocation.finish();
+            }
           } catch(e) {
             // Noop
           }
