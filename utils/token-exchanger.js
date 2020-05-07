@@ -109,7 +109,7 @@ export default class TokenExchanger {
       });
 
       const tokenExists = (typeof value !== "undefined" && value === "1");
-      
+
       if (!tokenExists) {
         await Storage.set({
           key: token,

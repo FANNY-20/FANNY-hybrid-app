@@ -1,6 +1,9 @@
 <script>
   import { mapState, mapActions } from "vuex";
+  import { Plugins } from "@capacitor/core";
   import TokenExchanger from "@/utils/token-exchanger";
+
+  const { Storage } = Plugins;
 
   export default {
     data() {
@@ -33,6 +36,9 @@
       ...mapActions("geolocation", [
         "sendGeolocation",
       ]),
+      ...mapActions("tokens", [
+        "sendTokens",
+      ]),
       async trySendGeolocation({ latitude, longitude }) {
         try {
           const exposedPublicUuids = await this.sendGeolocation({
@@ -60,6 +66,28 @@
 
         this.tokenExchanger = new TokenExchanger(publicUuid, privateUuid);
       },
+      async declareDisease() {
+        // Gathering tokens from storage
+        const { keys } = await Storage.keys();
+        const tokens = keys.filter(k => /^[a-f0-9]{64}$/.test(k));
+
+        try {
+          await this.sendTokens({
+            tokens,
+          });
+
+          // Clear tokens from storage
+          for(const token of tokens) {
+            Storage.remove({
+              key: token,
+            });
+          }
+
+          // TODO: toast OK
+        } catch(e) {
+          // TODO: toast NOK
+        }
+      },
       onActivateTrackingButtonClick() {
         this.isGeolocationStarted = true;
       },
@@ -70,7 +98,7 @@
         // TODO
       },
       onDeclareDiseaseButtonClick() {
-        // TODO
+        this.declareDisease();
       },
     },
     created() {
