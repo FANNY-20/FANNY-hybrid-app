@@ -1,0 +1,27 @@
+@mixin box-shadow-transparent() {
+  box-shadow:
+    0 3px 6px $--color-transparent,
+    0 3px 6px $--color-transparent;
+}
+
+@mixin box-shadow-low($color: $--color-shadow) {
+  box-shadow:
+    0 3px 6px rgba($color, 0.16),
+    0 3px 6px rgba($color, 0.23);
+}
+
+@mixin box-shadow($color: $--color-shadow) {
+  box-shadow:
+    0 10px 20px rgba($color, 0.19),
+    0 6px 6px rgba($color, 0.23);
+}
+
+@mixin box-shadow-high($color: $--color-shadow) {
+  box-shadow:
+    0 14px 28px rgba($color, 0.25),
+    0 10px 10px rgba($color, 0.22);
+}
+
+@mixin text-shadow($color: $--color-shadow) {
+  text-shadow: 1px 1px 7px rgba($color, 0.5);
+}

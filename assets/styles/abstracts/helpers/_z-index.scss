@@ -1,0 +1,19 @@
+$_z-indexes: (
+  notification: 3200,
+  modal: 1600,
+  overlay: 800,
+  layout: 400,
+  special-case: 200,
+  dropdown: 100,
+  standard: 0,
+);
+
+@function z($types...) {
+  $sum: 0;
+
+  @each $type in $types {
+    $sum: $sum + map_get($_z-indexes, $type);
+  }
+
+  @return $sum;
+}

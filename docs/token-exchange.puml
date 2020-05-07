@@ -1,0 +1,52 @@
+@startuml
+
+title
+Token exchange process between 2 peers
+end title
+
+autonumber
+participant Alice as a
+participant Bob as b
+
+note over a,b
+Alice owns:
+- **UuidA** (shareable with server and peers)
+
+Bob owns:
+- **UuidB** (shareable with server and peers)
+
+The process is initiated when server provides
+the Bob's uuid (**UuidB**) to Alice
+end note
+
+a -> a: Craft **Token**
+note left
+**Token** = sha256(**UuidA** + **UuidB**)
+**UuidA** and **UuidB** are sorted by
+alphabetical order before concatenating
+end note
+
+a -> b: Send **Token**
+note left
+Opens WebRTC channel
+using **UuidB**
+end note
+
+b -> b: Check **Token**
+note right
+Check whether such a **Token**
+already exists locally.
+If no then store it (OK),
+otherwise discard (NOK)
+end note
+
+b -> a: Send acknowledgment (OK or NOK)
+note left
+If acknowledgment is OK
+then store **Token**.
+If NOK, discard
+end note
+
+a -> a: Close channel
+
+@enduml

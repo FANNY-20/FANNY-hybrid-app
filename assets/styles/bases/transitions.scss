@@ -1,0 +1,12 @@
+/*
+ * Transition de page par défaut
+ */
+:root {
+  @include transition-enter("page", 250ms) {
+    opacity: 0;
+  }
+
+  @include transition-leave-to("page", 150ms) {
+    opacity: 0;
+  }
+}

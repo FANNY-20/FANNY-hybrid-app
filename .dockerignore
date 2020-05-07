@@ -1,0 +1,10 @@
+.dockerignore
+Dockerfile*
+.git
+.gitignore
+node_modules/
+.nuxt/
+test/
+*.md
+*.log
+_ide_helper.webpack.config.js

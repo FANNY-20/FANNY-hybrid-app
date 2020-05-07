@@ -1,0 +1,33 @@
+$--breakpoints: (
+  smartphone: 480px,
+  tablet: 657px,
+  tablet-large: 768px,
+  desktop: 1024px,
+  desktop-medium: 1280px,
+  desktop-large: 1600px,
+);
+
+@mixin respond-to($media) {
+  @if $media == "print" {
+    @media print {
+      @content;
+    }
+  } @else if $media == "retina" {
+    @media only screen and (min-resolution: 192dpi),
+      only screen and (min-resolution: 2dppx) {
+      @content;
+    }
+  } @else {
+    @each $breakpoint-name, $breakpoint-width in $--breakpoints {
+      @if $media == $breakpoint-name {
+        @media only screen and(min-width: $breakpoint-width) {
+          @content;
+        }
+      }
+    }
+  }
+}
+
+@function get-breakpoint($breakpoint-name) {
+  @return map_get($--breakpoints, $breakpoint-name);
+}

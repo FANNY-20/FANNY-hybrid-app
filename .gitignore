@@ -1,0 +1,28 @@
+# Dependencies
+node_modules
+
+# Logs
+npm-debug.log
+selenium-server.log
+
+# Nuxt build
+.nuxt
+
+# Nuxt generate
+dist
+
+# Tests
+test/e2e/reports
+test/e2e/screenshots
+
+# Custom
+.idea
+.env
+.DS_Store
+android
+ios
+docs/enhanced_token_exchange.png
+docs/token_exchange.png
+build-native.sh
+.gradle
+.yo-rc.json
