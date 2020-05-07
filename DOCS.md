@@ -7,7 +7,7 @@
 
 ## Nuxt
 
-Framework basé sur VueJS
+Framework based on VueJS
 
 - [Doc officielle Nuxt](https://nuxtjs.org/guide)
 - [API](https://nuxtjs.org/api)
@@ -15,21 +15,21 @@ Framework basé sur VueJS
 
 ## Joi
 
-Librairie de description et de validation de schémas (objets complexes)
+Schema validation
 
 - [Doc officielle Joi](https://github.com/hapijs/joi)
 - [API](https://github.com/hapijs/joi/blob/v16.0.0-rc2/API.md)
 
 ## Nightwatch
 
-Framework de tests fonctionnels end-to-end
+Framework for e2e tests
 
 - [API (expect, assert, ...)](https://nightwatchjs.org/api)
 - [Page Objects](https://nightwatchjs.org/guide#working-with-page-objects)
 
 ## Mocha + Chai
 
-Framework de tests unitaires (Mocha) et sa librairie d'assertions (Chai)
+Framework for unit tests (Mocha) and its assert lib (Chai)
 
 - [Doc officielle Mocha](https://mochajs.org/#getting-started)
 - [Doc officielle Chai](https://www.chaijs.com/guide/styles/)
@@ -37,27 +37,27 @@ Framework de tests unitaires (Mocha) et sa librairie d'assertions (Chai)
 
 ## Prettier
 
-Formateur de code (Vue, JS, JSON, HTML, SCSS, CSS, ...)
+Code formatting (Vue, JS, JSON, HTML, SCSS, CSS, ...)
 
 - [Doc officielle Prettier](https://prettier.io/docs/en/index.html)
 
 ## ESLint
 
-Linter de code, permet l'application de règles de bonne pratique pour ECMAScript
+Code linter, ECMAScript best practices
 
 - [Doc officielle ESLint](https://eslint.org/docs/user-guide/getting-started)
 - [Liste des règles](https://eslint.org/docs/rules/)
 
 ## StyleLint
 
-Linter de code, permet l'application de règles de bonne pratique pour SCSS / CSS
+Code linter, for SCSS / CSS
 
 - [Doc officielle StyleLint](https://stylelint.io/)
 - [Liste des règles](https://stylelint.io/user-guide/rules/)
 
 ## Nuxt Vuetify
 
-Permet l'intégration de la librairie de composants Vuetify, basée sur Material
+Material based component framework
 
 - [Doc officielle Nuxt Vuetify](https://github.com/nuxt-community/vuetify-module#readme)
 - [Doc officielle vuetify-loader](https://github.com/vuetifyjs/vuetify-loader#readme)
@@ -65,7 +65,7 @@ Permet l'intégration de la librairie de composants Vuetify, basée sur Material
 
 ## Nuxt Axios
 
-Permet la communication AJAX
+AJAX lib
 
 - [Doc officielle Nuxt Axios](https://axios.nuxtjs.org/)
 - [Doc officielle Axios](https://github.com/axios/axios#readme)
