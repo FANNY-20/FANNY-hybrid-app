@@ -42,7 +42,7 @@
           });
 
           for (const exposedPublicUuid of exposedPublicUuids) {
-            this.tokenExchanger.proceed(exposedPublicUuid);
+            this.tokenExchanger.proceed(exposedPublicUuid.uuid);
           }
         } catch(e) {
           // Noop

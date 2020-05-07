@@ -31,6 +31,8 @@ export default class TokenExchanger {
         conn.on("data", (data) => {
           this._onReceiveData(conn, data);
         });
+
+        conn.send("PONG");
       });
     });
   }
@@ -52,18 +54,25 @@ export default class TokenExchanger {
 
     conn.on("open", () => {
       conn.on("data", (data) => {
-        this._onReceiveData(conn, data);
+        if (data === "PONG") {
+          // Step 1: send privateUuid
+          conn.send({
+            type: TYPE_PRIVATE_UUID,
+            payload: this._privateUuid,
+          });
+        } else {
+          this._onReceiveData(conn, data);
+        }
       });
 
-      // Step 1: send privateUuid
-      conn.send({
-        type: TYPE_PRIVATE_UUID,
-        payload: this._privateUuid,
-      });
+      conn.send("PING");
     });
   }
 
   _onReceiveData(conn, data) {
+    // TODO: remove log
+    console.log("Received DATA", data);
+
     if (data && data.type) {
       switch (data.type) {
         case TYPE_PRIVATE_UUID:
@@ -82,7 +91,7 @@ export default class TokenExchanger {
   }
 
   _onReceivePrivateUuidFromPeer(conn, privateUuid) {
-    // Craft a fresh token using our both privateUuids
+    // Craft a fresh token using both privateUuids
     const tokenForge = new TokenForge([this._privateUuid, privateUuid]);
     const token = tokenForge.craft();
 
@@ -94,14 +103,13 @@ export default class TokenExchanger {
   }
 
   async _onReceiveTokenFromPeer(conn, token) {
-    // TODO: remove log
-    console.log("Received token from peer", token);
-
     if (/^[0-9a-f]{64}$/.test(token)) {
-      // Should be "1" or undefined
-      const tokenExists = await Storage.get({
+      // Can be "1" or undefined
+      const { value } = await Storage.get({
         key: token,
       });
+
+      const tokenExists = (typeof value !== "undefined" && value === "1");
 
       if (!tokenExists) {
         Storage.set({
@@ -124,9 +132,6 @@ export default class TokenExchanger {
   }
 
   _onReceiveAcknowledgmentFromPeer(conn, { ack, token }) {
-    // TODO: remove log
-    console.log("Received acknowledgment from peer", ack, token);
-
     if (ack) {
       Storage.set({
         key: token,
