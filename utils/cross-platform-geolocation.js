@@ -48,6 +48,10 @@ export class CrossPlatformGeolocation {
       this._watchId = Geolocation.watchPosition(
         {},
         (position) => {
+          if (!position) {
+            return;
+          }
+
           const { coords } = position;
           const { latitude, longitude } = coords;
 

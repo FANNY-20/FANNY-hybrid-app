@@ -1,6 +1,11 @@
 import TokenForge from "./token-forge";
 import Peer from "peerjs";
+import { Plugins } from "@capacitor/core";
 
+const { Storage } = Plugins;
+
+const PING = "PING";
+const PONG = "PONG";
 const TYPE_PRIVATE_UUID = "PRIVATE_UUID";
 const TYPE_TOKEN = "TOKEN";
 const TYPE_ACK = "ACK";
@@ -28,6 +33,8 @@ export default class TokenExchanger {
         conn.on("data", (data) => {
           this._onReceiveData(conn, data);
         });
+
+        conn.send(PONG);
       });
     });
   }
@@ -49,14 +56,18 @@ export default class TokenExchanger {
 
     conn.on("open", () => {
       conn.on("data", (data) => {
-        this._onReceiveData(conn, data);
+        if (data === PONG) {
+          // Step 1: send privateUuid
+          conn.send({
+            type: TYPE_PRIVATE_UUID,
+            payload: this._privateUuid,
+          });
+        } else {
+          this._onReceiveData(conn, data);
+        }
       });
 
-      // Step 1: send privateUuid
-      conn.send({
-        type: TYPE_PRIVATE_UUID,
-        payload: this._privateUuid,
-      });
+      conn.send(PING);
     });
   }
 
@@ -79,7 +90,7 @@ export default class TokenExchanger {
   }
 
   _onReceivePrivateUuidFromPeer(conn, privateUuid) {
-    // Craft a fresh token using our both privateUuids
+    // Craft a fresh token using both privateUuids
     const tokenForge = new TokenForge([this._privateUuid, privateUuid]);
     const token = tokenForge.craft();
 
@@ -90,23 +101,42 @@ export default class TokenExchanger {
     });
   }
 
-  _onReceiveTokenFromPeer(conn, token) {
-    // TODO: store token locally
-    console.log(token);
+  async _onReceiveTokenFromPeer(conn, token) {
+    if (/^[0-9a-f]{64}$/.test(token)) {
+      // Can be "1" or undefined
+      const { value } = await Storage.get({
+        key: token,
+      });
 
-    // Step 3: send acknowledgment
-    conn.send({
-      type: TYPE_ACK,
-      payload: {
-        ack: false, // TODO: ack based on token stored or not
-        token,
-      },
-    });
+      const tokenExists = (typeof value !== "undefined" && value === "1");
+      
+      if (!tokenExists) {
+        await Storage.set({
+          key: token,
+          value: "1",
+        });
+      }
+
+      // Step 3: send acknowledgment
+      conn.send({
+        type: TYPE_ACK,
+        payload: {
+          ack: !tokenExists,
+          token,
+        },
+      });
+    } else {
+      conn.close();
+    }
   }
 
   _onReceiveAcknowledgmentFromPeer(conn, { ack, token }) {
-    // TODO: store token locally based on ack
-    console.log(ack, token);
+    if (ack) {
+      Storage.set({
+        key: token,
+        value: "1",
+      });
+    }
 
     // Step 4: close connection, exchange is successful
     conn.close();
