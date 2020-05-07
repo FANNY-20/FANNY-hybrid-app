@@ -1,6 +1,7 @@
 <script>
   import { mapState, mapActions } from "vuex";
   import { Plugins } from "@capacitor/core";
+  import _intersection from "lodash.intersection";
   import TokenExchanger from "@/utils/token-exchanger";
 
   const { Storage } = Plugins;
@@ -15,6 +16,10 @@
       ...mapState("me", [
         "publicUuid",
         "privateUuid",
+      ]),
+      ...mapState("tokens", [
+        "isFetchingTokens",
+        "isSendingTokens",
       ]),
     },
     watch: {
@@ -37,6 +42,7 @@
         "sendGeolocation",
       ]),
       ...mapActions("tokens", [
+        "fetchTokens",
         "sendTokens",
       ]),
       async trySendGeolocation({ latitude, longitude }) {
@@ -65,6 +71,24 @@
         }
 
         this.tokenExchanger = new TokenExchanger(publicUuid, privateUuid);
+      },
+      async askForExposure() {
+        try {
+          const remoteTokens = (await this.fetchTokens()).map(t => t.token);
+          const { keys } = await Storage.keys();
+          const localTokens = keys.filter(k => /^[a-f0-9]{64}$/.test(k));
+          const commonTokens = _intersection(localTokens, remoteTokens);
+
+          if (commonTokens.length > 0) {
+            // TODO: toast exposed
+            console.log("EXPOSED");
+          } else {
+            // TODO: toast not exposed
+            console.log("NOT EXPOSED");
+          }
+        } catch(e) {
+          // TODO: toast error
+        }
       },
       async declareDisease() {
         // Gathering tokens from storage
@@ -95,7 +119,7 @@
         this.isGeolocationStarted = false;
       },
       onAskForExposureButtonClick() {
-        // TODO
+        this.askForExposure();
       },
       onDeclareDiseaseButtonClick() {
         this.declareDisease();
@@ -144,6 +168,7 @@
       class="cta-button"
       color="orange white--text"
       x-large
+      :loading="isFetchingTokens"
       @click="onAskForExposureButtonClick"
     >
       Ai-je été exposé ?
@@ -153,6 +178,7 @@
       class="cta-button"
       color="red white--text"
       x-large
+      :loading="isSendingTokens"
       @click="onDeclareDiseaseButtonClick"
     >
       Je me déclare porteur !
