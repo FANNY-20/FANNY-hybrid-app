@@ -2,9 +2,10 @@ import { CrossPlatformGeolocation } from "@/utils/cross-platform-geolocation";
 
 export default async function (ctx, inject) {
   const config = {
-    desiredAccuracy: 0,
-    stationaryRadius: 1,
-    distanceFilter: 1,
+    desiredAccuracy: 0, // meters
+    stationaryRadius: 1, // meters
+    distanceFilter: 1, // meters
+    interval: 1000, // milliseconds
     debug: false,
     stopOnTerminate: true,
     notificationTitle: "Suivi Stop-Covid",
