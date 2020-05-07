@@ -2,6 +2,98 @@
 
 ![Release](https://img.shields.io/badge/Release-0.1.0-blue.svg)
 
+## Context
+
+This project is part of the implementation of the FANNY protocol, divided into 2 main distinct projects
+([the API backend](https://github.com/FANNY-20/FANNY-backend) and
+[the hybrid mobile application](https://github.com/FANNY-20/FANNY-hybrid-app)).
+A third project ([the geolocation simulator](https://github.com/FANNY-20/FANNY-geolocation-simulator))
+is also available as a development tool or for manual testing.
+You can learn more about the FANNY protocol itself [here](https://github.com/FANNY-20/The_FANNY_protocol_V0.1).
+
+## Application stack
+
+This application uses a stack of many different technologies.
+
+### VueJS / NuxtJS
+
+A conjunction of the famous VueJS web component oriented framework and the NuxtJS universal-ready web application framework.
+This helps writing blazing fast reactive interfaces and component logic.
+
+### VuetifyJS
+
+This is a material component framework designed to work well with VueJS.
+
+### Capacitor / Ionic-native / Cordova plugins
+
+These 3 technologies are used to provide a bridge towards mobile development. Capacitor has been chosen for its simplicity
+as much as for the Ionic deep experience in hybrid application development.
+
+## Why such a stack ?
+
+As you can see, it is mainly based on web technologies. This way, you can take benefits of the HMR
+(Hot Module Replacement) during the logic development phase, helping improving the productivity.
+You can experience your application using a simple browser instead of being forced to compile for a mobile target or emulator.
+Capacitor is designed to allow multiple targets such as browser, iOS, Android and even Electron apps.
+
+## Quick start
+
+The followings steps consider you already have set the bound [API backend server](https://github.com/FANNY-20/FANNY-backend).
+Let's say this API is listening on **http://localhost:8000** (default Laravel host and port when serving an app).
+
+- Copy `.env.default` to `.env` if you want to work in a development environment
+- Add your env variables in it (the `.env` file is only read while in development mode)
+
+```
+# .env
+
+# Usually used for SEO purposes, you can leave it blank
+BASE_URL=
+# The API host: here it should be http://localhost:8000
+API_HOST=
+# A bearer token used to communicate with the API (see the backend conf - outside of this scope)
+AUTHORIZATION_TOKEN=
+# Used for WebRTC communication as a broker,
+# you can set your own PeerJS server host, port and key or leave them blank
+PEER_SERVER_HOST=
+PEER_SERVER_PORT=
+PEER_SERVER_KEY=
+```
+
+- Run `yarn` to install dependencies
+- Run `yarn dev` if you want to run a development server listening on localhost:3000 (with HMR)
+- Create a `dist/` directory in the root directory
+- Run `yarn cap add android` to deploy an Android sub-project in the root directory (AndroidStudio required)
+- Run `yarn cap add iOS` to deploy an iOS sub-project in the root directory (MacOS with Xcode required)
+- Run `yarn cap sync` to copy all Cordova plugins to both mobile sub-projects
+- Finally run `yarn build:native` in order to automatically:
+  - build your webapp (don't forget to set your env variables since as stated the `.env` is not read for a production build)
+  - copy your assets from the `dist/` directory to both mobile sub-projects
+  - open one or another of mobile IDE (Xcode or AndroidStudio)
+
+### Important, please note !
+
+You will have to manually add some stuff directly in your mobile projects:
+
+#### For Android
+
+- Open `AndroidManifest.xml` and add `android:usesCleartextTraffic="true"` attribute to `<application>` (allow non-HTTPS traffic)
+- Open `res/values/strings.xml` and add:
+
+```xml
+<resources>
+  <!-- [...] -->
+
+  <string name="mauron85_bgloc_account_name">$ACCOUNT_NAME</string>
+  <string name="mauron85_bgloc_account_type">$ACCOUNT_TYPE</string>
+  <string name="mauron85_bgloc_content_authority">$CONTENT_AUTHORITY</string>
+</resources>
+```
+
+#### For iOS
+
+Coming soon...
+
 ## Commands
 
 ### Install dependencies
@@ -102,3 +194,12 @@ $ yarn unit
 ## Changelog
 
 [See CHANGELOG](./CHANGELOG.md)
+
+## Ideas / improvements / evolution
+
+- [ ] Better BackgroundGeolocation config to increase battery saving while not degrading tracking precision
+- [ ] ...
+
+## License
+
+[MIT](./LICENSE)
