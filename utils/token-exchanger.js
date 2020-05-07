@@ -4,6 +4,8 @@ import { Plugins } from "@capacitor/core";
 
 const { Storage } = Plugins;
 
+const PING = "PING";
+const PONG = "PONG";
 const TYPE_PRIVATE_UUID = "PRIVATE_UUID";
 const TYPE_TOKEN = "TOKEN";
 const TYPE_ACK = "ACK";
@@ -32,7 +34,7 @@ export default class TokenExchanger {
           this._onReceiveData(conn, data);
         });
 
-        conn.send("PONG");
+        conn.send(PONG);
       });
     });
   }
@@ -54,7 +56,7 @@ export default class TokenExchanger {
 
     conn.on("open", () => {
       conn.on("data", (data) => {
-        if (data === "PONG") {
+        if (data === PONG) {
           // Step 1: send privateUuid
           conn.send({
             type: TYPE_PRIVATE_UUID,
@@ -65,14 +67,11 @@ export default class TokenExchanger {
         }
       });
 
-      conn.send("PING");
+      conn.send(PING);
     });
   }
 
   _onReceiveData(conn, data) {
-    // TODO: remove log
-    console.log("Received DATA", data);
-
     if (data && data.type) {
       switch (data.type) {
         case TYPE_PRIVATE_UUID:
