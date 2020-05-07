@@ -23,7 +23,7 @@ $ yarn build
 $ yarn start
 ```
 
-## Run production build for hybrid application
+### Run production build for hybrid application
 
 ```bash
 $ yarn build:native
