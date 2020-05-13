@@ -21,11 +21,9 @@ export default class TokenExchanger {
     const peerOptions = {
       host: process.env.PEER_SERVER_HOST,
       port: process.env.PEER_SERVER_PORT,
+      key: process.env.PEER_SERVER_KEY,
+      secure: process.env.PEER_SERVER_PORT === 443,
     };
-
-    if (process.env.PEER_SERVER_KEY) {
-      peerOptions.key = process.env.PEER_SERVER_KEY;
-    }
 
     this._peer = new Peer(publicUuid, peerOptions);
     this._peer.on("connection", (conn) => {
