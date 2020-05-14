@@ -1,6 +1,6 @@
 {
   "name": "fanny-hybrid-app",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Benoit Fleuriaud <benoit.fleuriaud@soyhuce.fr>",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nuxt",
