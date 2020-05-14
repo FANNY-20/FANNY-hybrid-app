@@ -92,7 +92,31 @@ You will have to manually add some stuff directly in your mobile projects:
 
 #### For iOS
 
-Coming soon...
+- Open `Info.plist` file and make sure you have the following entries:
+
+```xml
+<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+<string>$ALWAYS_USAGE_DESCRIPTION</string>
+
+<key>UIBackgroundModes</key>
+<array>
+    <string>fetch</string>
+    <string>location</string>
+    <string>processing</string>
+</array>
+
+<key>CFBundleURLTypes</key>
+<array>
+    <dict>
+      <key>CFBundleTypeRole</key>
+      <key>CFBundleURLSchemes</key>
+      <string>Editor</string>
+      <array>
+        <string>prefs</string>
+      </array>
+    </dict>
+</array>
+```
 
 ## Commands
 
@@ -198,6 +222,9 @@ $ yarn unit
 ## Ideas / improvements / evolution
 
 - [ ] Better BackgroundGeolocation config to increase battery saving while not degrading tracking precision
+- [ ] Adding everything to become GDPR compliant
+- [ ] Thinking about a public / private random UUIDs regeneration protocol (to improve anonymity) on a fixed or dynamic duration basis
+- [ ] Trying to make the WebRTC implementation VPN friendly (to improve anonymity as well)
 - [ ] ...
 
 ## License
