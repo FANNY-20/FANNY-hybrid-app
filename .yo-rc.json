@@ -1,9 +1,0 @@
-{
-  "generator-nuxt": {
-    "appLocale": "fr",
-    "installed": {
-      "vuetify": true,
-      "axios": true
-    }
-  }
-}
