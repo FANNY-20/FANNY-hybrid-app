@@ -3,13 +3,18 @@
   import { Plugins } from "@capacitor/core";
   import _intersection from "lodash.intersection";
   import TokenExchanger from "@/utils/token-exchanger";
+  import TermsOfUse from "@/components/terms-of-use";
 
   const { Storage } = Plugins;
 
   export default {
+    components: {
+      TermsOfUse,
+    },
     data() {
       return {
         isGeolocationStarted: false,
+        isTermsOfUseDialogOpen: false,
       };
     },
     computed: {
@@ -187,6 +192,42 @@
     >
       Je me déclare porteur !
     </v-btn>
+
+    <v-dialog v-model="isTermsOfUseDialogOpen">
+      <template v-slot:activator="{ on }">
+        <v-btn
+          class="tou-button"
+          color="primary"
+          text
+          large
+          v-on="on"
+        >
+          Lire les CGU
+        </v-btn>
+      </template>
+
+      <v-card>
+        <v-card-title>
+          Conditions générales d'utilisation
+        </v-card-title>
+
+        <v-card-text>
+          <terms-of-use />
+        </v-card-text>
+
+        <v-card-actions>
+          <v-spacer />
+
+          <v-btn
+            color="primary"
+            text
+            @click="isTermsOfUseDialogOpen = false"
+          >
+            Fermer
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -199,6 +240,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    .cta-button:first-child,
+    .tou-button {
+      margin-top: auto;
+    }
 
     .cta-button + .cta-button {
       margin-top: $_gutter;
