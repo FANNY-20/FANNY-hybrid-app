@@ -139,6 +139,12 @@ $ yarn build
 $ yarn start
 ```
 
+### Generate platform assets (AppIcon & SplashScreen)
+
+```bash
+$ yarn resources
+```
+
 ### Run production build for hybrid application
 
 ```bash
