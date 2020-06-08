@@ -23,6 +23,8 @@ android
 ios
 docs/enhanced_token_exchange.png
 docs/token_exchange.png
-build-native.sh
 .gradle
 .yo-rc.json
+
+!resources/ios
+!resources/android
