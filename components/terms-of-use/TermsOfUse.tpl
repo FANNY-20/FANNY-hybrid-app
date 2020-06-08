@@ -1,5 +1,5 @@
 <div class="c-terms-of-use">
-  <h2 class="subtitle-1">Vib SAS</h2>
+  <h2 class="title">Vib SAS</h2>
 
   <p>
     La société Vib, est une société par actions simplifiée au capital de 10.000
@@ -22,7 +22,7 @@
     <a href="https://www.ovh.com">https://www.ovh.com</a>
   </p>
 
-  <h2 class="subtitle-1">Protection des données personnelles</h2>
+  <h2 class="title">Protection des données personnelles</h2>
 
   <p>
     L'Utilisateur est informé que les données de localisation sont collectées
