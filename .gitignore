@@ -27,5 +27,6 @@ build-native.sh
 .gradle
 .yo-rc.json
 
-!resources/ios
-!resources/android
+!resources/ios/Info.plist
+!resources/android/AndroidManifest.xml
+!resources/android/strings.xml

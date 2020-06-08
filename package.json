@@ -19,7 +19,8 @@
     "e2e": "node test/e2e/runner.js --env chrome-headless,firefox-headless",
     "unit": "mocha --config mocha.config.js './**/*.test.js'",
     "test": "yarn unit && yarn e2e",
-    "postinstall": "jetifier"
+    "postinstall": "jetifier",
+    "resources": "cordova-res ios && cordova-res android && node scripts/resources.js"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
