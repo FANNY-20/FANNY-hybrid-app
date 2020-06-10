@@ -28,5 +28,4 @@ build-native.sh
 .yo-rc.json
 
 !resources/ios/Info.plist
-!resources/android/AndroidManifest.xml
 !resources/android/strings.xml
