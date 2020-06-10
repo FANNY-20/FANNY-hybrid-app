@@ -1,7 +1,6 @@
 #!/bin/bash
 
 if [ -d "android" ]; then
-  cp resources/android/AndroidManifest.xml android/app/src/main
   cp resources/android/strings.xml android/app/src/main/res/values
 fi
 

@@ -1,6 +1,6 @@
 {
-  "appId": "solutions.vib.anonymousvirustracing",
-  "appName": "StopCovid",
+  "appId": "solutions.vib.virustracing",
+  "appName": "Virus Tracing",
   "bundledWebRuntime": false,
   "npmClient": "yarn",
   "webDir": "dist",
