@@ -23,9 +23,19 @@ export default {
   theme: {
     disable: false,
     themes: {
-      // light: {},
-      // dark: {},
+      light: {
+        primary: "#22b0ff",
+        warning: "#ffa822",
+        error: "#ff3c34",
+      },
+      dark: {
+        primary: "#22b0ff",
+        warning: "#ffa822",
+        error: "#ff3c34",
+        background: "#1a1a1a",
+      },
     },
+    dark: true,
     options: {
       customProperties: true,
     },

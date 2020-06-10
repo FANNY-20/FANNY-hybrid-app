@@ -3,5 +3,11 @@
  */
 module.exports = {
   optionsPath: "@/vuetify.options.js",
-  treeShake: process.env.NODE_ENV === "production",
+  treeShake: true,
+  customVariables: ["@/assets/styles/vuetify.scss"],
+  defaultAssets: {
+    font: {
+      family: "Aldrich",
+    },
+  },
 };

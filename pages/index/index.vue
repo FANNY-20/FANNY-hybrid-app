@@ -148,7 +148,7 @@
     <v-btn
       v-if="isGeolocationStarted"
       class="cta-button"
-      color="blue white--text"
+      color="primary"
       x-large
       @click="onDeactivateTrackingButtonClick"
     >
@@ -162,7 +162,7 @@
     <v-btn
       v-else
       class="cta-button"
-      color="blue white--text"
+      color="primary"
       x-large
       @click="onActivateTrackingButtonClick"
     >
@@ -175,7 +175,7 @@
 
     <v-btn
       class="cta-button"
-      color="orange white--text"
+      color="warning"
       x-large
       :loading="isFetchingTokens"
       @click="onAskForExposureButtonClick"
@@ -185,7 +185,7 @@
 
     <v-btn
       class="cta-button"
-      color="red white--text"
+      color="error"
       x-large
       :loading="isSendingTokens"
       @click="onDeclareDiseaseButtonClick"
@@ -206,27 +206,29 @@
         </v-btn>
       </template>
 
-      <v-card>
-        <v-card-title>
-          Conditions générales d'utilisation
-        </v-card-title>
+      <v-theme-provider light>
+        <v-card>
+          <v-card-title>
+            Conditions générales d'utilisation
+          </v-card-title>
 
-        <v-card-text>
-          <terms-of-use />
-        </v-card-text>
+          <v-card-text>
+            <terms-of-use />
+          </v-card-text>
 
-        <v-card-actions>
-          <v-spacer />
+          <v-card-actions>
+            <v-spacer />
 
-          <v-btn
-            color="primary"
-            text
-            @click="isTermsOfUseDialogOpen = false"
-          >
-            Fermer
-          </v-btn>
-        </v-card-actions>
-      </v-card>
+            <v-btn
+              color="primary"
+              text
+              @click="isTermsOfUseDialogOpen = false"
+            >
+              Fermer
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-theme-provider>
     </v-dialog>
   </div>
 </template>
