@@ -20,7 +20,7 @@
     "unit": "mocha --config mocha.config.js './**/*.test.js'",
     "test": "yarn unit && yarn e2e",
     "postinstall": "jetifier",
-    "resources": "cordova-res ios && cordova-res android && node scripts/resources.js"
+    "resources": " yarn cordova-res ios && yarn cordova-res android && node scripts/resources.js"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
@@ -33,6 +33,7 @@
     "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
     "chromedriver": "^81.0.0",
+    "cordova-res": "^0.14.0",
     "cross-env": "^7.0.2",
     "cross-spawn": "^7.0.2",
     "eslint": "^7.0.0",
