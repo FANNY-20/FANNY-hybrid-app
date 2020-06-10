@@ -65,58 +65,13 @@ PEER_SERVER_KEY=
 - Create a `dist/` directory in the root directory
 - Run `yarn cap add android` to deploy an Android sub-project in the root directory (AndroidStudio required)
 - Run `yarn cap add iOS` to deploy an iOS sub-project in the root directory (MacOS with Xcode required)
+- Run `yarn resources` to generate platform assets
+- Run `sh set-config.sh` to set Android & iOS configurations
 - Run `yarn cap sync` to copy all Cordova plugins to both mobile sub-projects
 - Finally run `yarn build:native` in order to automatically:
   - build your webapp (don't forget to set your env variables since as stated the `.env` is not read for a production build)
   - copy your assets from the `dist/` directory to both mobile sub-projects
   - open one or another of mobile IDE (Xcode or AndroidStudio)
-
-### Important, please note !
-
-You will have to manually add some stuff directly in your mobile projects:
-
-#### For Android
-
-- Open `AndroidManifest.xml` and add `android:usesCleartextTraffic="true"` attribute to `<application>` (allow non-HTTPS traffic)
-- Open `res/values/strings.xml` and add:
-
-```xml
-<resources>
-  <!-- [...] -->
-
-  <string name="mauron85_bgloc_account_name">$ACCOUNT_NAME</string>
-  <string name="mauron85_bgloc_account_type">$ACCOUNT_TYPE</string>
-  <string name="mauron85_bgloc_content_authority">$CONTENT_AUTHORITY</string>
-</resources>
-```
-
-#### For iOS
-
-- Open `Info.plist` file and make sure you have the following entries:
-
-```xml
-<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-<string>$ALWAYS_USAGE_DESCRIPTION</string>
-
-<key>UIBackgroundModes</key>
-<array>
-    <string>fetch</string>
-    <string>location</string>
-    <string>processing</string>
-</array>
-
-<key>CFBundleURLTypes</key>
-<array>
-    <dict>
-      <key>CFBundleTypeRole</key>
-      <key>CFBundleURLSchemes</key>
-      <string>Editor</string>
-      <array>
-        <string>prefs</string>
-      </array>
-    </dict>
-</array>
-```
 
 ## Commands
 
@@ -137,12 +92,6 @@ $ yarn dev
 ```bash
 $ yarn build
 $ yarn start
-```
-
-### Generate platform assets (AppIcon & SplashScreen)
-
-```bash
-$ yarn resources
 ```
 
 ### Run production build for hybrid application
