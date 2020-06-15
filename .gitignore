@@ -29,3 +29,5 @@ build-native.sh
 
 !resources/ios/Info.plist
 !resources/android/strings.xml
+!resources/android/icon-background.png
+!resources/android/icon-foreground.png
