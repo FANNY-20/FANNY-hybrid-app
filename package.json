@@ -19,7 +19,8 @@
     "e2e": "node test/e2e/runner.js --env chrome-headless,firefox-headless",
     "unit": "mocha --config mocha.config.js './**/*.test.js'",
     "test": "yarn unit && yarn e2e",
-    "postinstall": "jetifier"
+    "postinstall": "jetifier",
+    "resources": " yarn cordova-res ios --skip-config --copy && yarn cordova-res android --skip-config --copy"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
@@ -32,6 +33,7 @@
     "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
     "chromedriver": "^81.0.0",
+    "cordova-res": "^0.15.0",
     "cross-env": "^7.0.2",
     "cross-spawn": "^7.0.2",
     "eslint": "^7.0.0",
