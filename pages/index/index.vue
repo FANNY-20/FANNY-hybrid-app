@@ -3,13 +3,18 @@
   import { Plugins } from "@capacitor/core";
   import _intersection from "lodash.intersection";
   import TokenExchanger from "@/utils/token-exchanger";
+  import TermsOfUse from "@/components/terms-of-use";
 
   const { Storage } = Plugins;
 
   export default {
+    components: {
+      TermsOfUse,
+    },
     data() {
       return {
         isGeolocationStarted: false,
+        isTermsOfUseDialogOpen: false,
       };
     },
     computed: {
@@ -143,7 +148,7 @@
     <v-btn
       v-if="isGeolocationStarted"
       class="cta-button"
-      color="blue white--text"
+      color="primary"
       x-large
       @click="onDeactivateTrackingButtonClick"
     >
@@ -157,7 +162,7 @@
     <v-btn
       v-else
       class="cta-button"
-      color="blue white--text"
+      color="primary"
       x-large
       @click="onActivateTrackingButtonClick"
     >
@@ -170,7 +175,7 @@
 
     <v-btn
       class="cta-button"
-      color="orange white--text"
+      color="warning"
       x-large
       :loading="isFetchingTokens"
       @click="onAskForExposureButtonClick"
@@ -180,13 +185,51 @@
 
     <v-btn
       class="cta-button"
-      color="red white--text"
+      color="error"
       x-large
       :loading="isSendingTokens"
       @click="onDeclareDiseaseButtonClick"
     >
       Je me déclare porteur !
     </v-btn>
+
+    <v-dialog v-model="isTermsOfUseDialogOpen">
+      <template v-slot:activator="{ on }">
+        <v-btn
+          class="tou-button"
+          color="primary"
+          text
+          large
+          v-on="on"
+        >
+          Lire les CGU
+        </v-btn>
+      </template>
+
+      <v-theme-provider light>
+        <v-card>
+          <v-card-title>
+            Conditions générales d'utilisation
+          </v-card-title>
+
+          <v-card-text>
+            <terms-of-use />
+          </v-card-text>
+
+          <v-card-actions>
+            <v-spacer />
+
+            <v-btn
+              color="primary"
+              text
+              @click="isTermsOfUseDialogOpen = false"
+            >
+              Fermer
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-theme-provider>
+    </v-dialog>
   </div>
 </template>
 
@@ -199,6 +242,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    .cta-button:first-child,
+    .tou-button {
+      margin-top: auto;
+    }
 
     .cta-button + .cta-button {
       margin-top: $_gutter;

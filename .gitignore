@@ -26,3 +26,8 @@ docs/token_exchange.png
 build-native.sh
 .gradle
 .yo-rc.json
+
+!resources/ios/Info.plist
+!resources/android/strings.xml
+!resources/android/icon-background.png
+!resources/android/icon-foreground.png

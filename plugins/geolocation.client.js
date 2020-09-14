@@ -8,7 +8,7 @@ export default async function (ctx, inject) {
     interval: 1000, // milliseconds
     debug: false,
     stopOnTerminate: true,
-    notificationTitle: "Suivi Stop-Covid",
+    notificationTitle: "Suivi Anonymous Virus Tracing",
     notificationText: "Actif",
   };
 

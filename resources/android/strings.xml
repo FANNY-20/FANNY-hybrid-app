@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Virus Tracing</string>
+    <string name="title_activity_main">Virus Tracing</string>
+    <string name="package_name">solutions.vib.virustracing</string>
+    <string name="custom_url_scheme">solutions.vib.virustracing</string>
+    <string name="mauron85_bgloc_account_name">$ACCOUNT_NAME</string>
+    <string name="mauron85_bgloc_account_type">$ACCOUNT_TYPE</string>
+    <string name="mauron85_bgloc_content_authority">$CONTENT_AUTHORITY</string>
+</resources>

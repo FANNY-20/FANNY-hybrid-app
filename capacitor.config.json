@@ -1,6 +1,6 @@
 {
-  "appId": "fr.soyhuce.stopcovid",
-  "appName": "StopCovid",
+  "appId": "solutions.vib.virustracing",
+  "appName": "Virus Tracing",
   "bundledWebRuntime": false,
   "npmClient": "yarn",
   "webDir": "dist",
