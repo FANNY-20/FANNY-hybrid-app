@@ -40,7 +40,7 @@
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-vue": "^6.2.2",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "geckodriver": "^1.19.1",
     "html-loader": "^1.1.0",
     "jetifier": "^1.6.5",
